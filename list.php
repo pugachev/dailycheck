@@ -55,6 +55,11 @@
     </header>
     <main>
 	<table>
+            <div class="headinfo">
+              <div class="tgthead">2022年05月05日</div>
+              <div class="tgthead">出費計:3000</div>
+              <div class="tgthead">カロリー計:1580</div>
+            </div>
             <tbody>
                 <tr>
                     <th>出費</th>

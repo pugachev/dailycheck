@@ -10,6 +10,20 @@ th, td {
     padding: 1em;
 }
 
+.headinfo{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+}
+
+.tgthead{
+  text-align: center;
+	font-size: 24px;
+	margin-top: 36px;
+	font-weight: bold;
+	width: calc(100% /6);
+}
 
 @media screen and (max-width: 844px) {
     table {
@@ -28,5 +42,18 @@ th, td {
     }
     table tr:nth-child(even) th{
       background-color:aqua;
+    }
+    .headinfo{
+      flex-wrap: wrap;
+      width: 100%;
+    }
+  
+    .tgthead{
+      display: block;
+      width: 90%;
+      text-align: center;
+      font-size: 18px;
+      margin-top: 10px;
+      font-weight: bold;
     }
 }
