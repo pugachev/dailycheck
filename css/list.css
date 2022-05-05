@@ -1,0 +1,32 @@
+/* main table */
+table {
+    border-collapse: collapse;
+    margin: 2em auto;
+    min-height: calc(100vh - 180px);
+}
+th, td {
+    border: 1px solid #ccc;
+    text-align: center;
+    padding: 1em;
+}
+
+
+@media screen and (max-width: 844px) {
+    table {
+      width:100%;
+      margin:0 auto;
+    }
+    tbody {
+      width: 100%;
+    }
+    th,td {
+      display: block;
+      width: 100%;
+    }
+    table tr:nth-child(odd) th{
+      background-color:pink;
+    }
+    table tr:nth-child(even) th{
+      background-color:aqua;
+    }
+}
