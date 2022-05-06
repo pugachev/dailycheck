@@ -11,7 +11,7 @@
     />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/calendar.css" />
-    <title>レスポンシブ対応</title>
+    <title>カレンダー画面</title>
   </head>
   <body>
   <?php include 'header.php';?>

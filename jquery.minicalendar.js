@@ -150,7 +150,7 @@
       var self = this;
       $.ajax({
         type: "GET",
-        url: self.opts.jsonData,
+        url: "http://localhost/dailycheck/calendar.php",
         dataType: "json",
         async: false,
         success: function(data){

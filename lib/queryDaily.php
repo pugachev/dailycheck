@@ -53,10 +53,20 @@ class QueryDaily extends connect
         return $pager;
     }
 
-    public function find($id)
+    // public function find($id)
+    // {
+    //     $stmt = $this->dbh->prepare("SELECT * FROM articles WHERE id=:id AND is_delete=0");
+    //     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    //     $stmt->execute();
+    //     $articles = $this->getArticles($stmt->fetchAll(PDO::FETCH_ASSOC));
+    //     return $articles[0];
+    // }
+
+    public function find($tgtmonthdate)
     {
-        $stmt = $this->dbh->prepare("SELECT * FROM articles WHERE id=:id AND is_delete=0");
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $tgtmonthdate .= '%';
+        $stmt = $this->dbh->prepare("SELECT  * FROM records WHERE tgtmonthdate LIKE :tgtmonthdate");
+        $stmt->bindParam(':tgtmonthdate', $tgtmonthdate, PDO::PARAM_STR);
         $stmt->execute();
         $articles = $this->getArticles($stmt->fetchAll(PDO::FETCH_ASSOC));
         return $articles[0];
@@ -65,13 +75,12 @@ class QueryDaily extends connect
     //対象月の全データを取得する
     public function findAll($tgtdate)
     {
-        //SELECT tgtdate,sum(tgtmoney),sum(tgtcalory) FROM `records` where tgtdate like '2022/05%' GROUP by tgtdate
-        //SELECT tgtdate,sum(tgtmoney) as 'totalmoney',sum(tgtcalory)as 'totalcalory' FROM `records` where tgtdate like '2022/05%' GROUP by tgtdate order BY tgtdate asc;
         $tgtdate .= '%';
-        $stmt = $this->dbh->prepare("SELECT  tgtdate,sum(tgtmoney) as 'totalmoney',sum(tgtcalory) as 'tgtcalory' FROM records WHERE LIKE :tgtdate group by tgtdate ORDER BY tgtdate DESC");
+        $stmt = $this->dbh->prepare("SELECT  tgtdate,sum(tgtmoney) as 'totalmoney',sum(tgtcalory) as 'totalcalory' FROM records WHERE tgtdate LIKE :tgtdate group by tgtdate ORDER BY tgtdate DESC");
         $stmt->bindParam(':tgtdate', $tgtdate, PDO::PARAM_STR);
         $stmt->execute();
-        $dailies = $this->getDaily($stmt->fetchAll(PDO::FETCH_ASSOC));
+        $dailies = $this->getMonthlyData($stmt->fetchAll(PDO::FETCH_ASSOC));
+
         return $dailies;
     }
 
@@ -125,19 +134,27 @@ class QueryDaily extends connect
 
     private function getDaily($results)
     {
+
+    }
+
+
+    private function getMonthlyData($results)
+    {
         $dailies = array();
+
         $today = date("Y/m");
         $tmparray = explode("/",$today);
-        print_r($tmparray[0].'   '.$tmparray[1]);
-        foreach ($results as $result) {
-            $daily = new Daily();
-            $daily->setId($result['id']);
-            $daily->setDate($result['tgtdate']);
-            $daily->setTotalCalory($result['totalcalory']);
-            $daily->setTotalMoney($result['totalmoney']);
+        $dailies['year']=$tmparray[0];
+        $dailies['month']=$tmparray[1];
 
-            $dailies[] = $daily;
+        $tmp=array();
+        foreach ($results as $result) {
+            $day = explode("/",$result['tgtdate'])[2];
+            $tmp[] =array('day'=>abs($day),"title"=>$result['totalmoney'],"type"=>"blue");
         }
+        $dailies['event'] = $tmp;
+        $dailies['holiday']= array("9","12","25");
+
         return $dailies;
     }
 
