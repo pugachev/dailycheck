@@ -126,6 +126,9 @@ class QueryDaily extends connect
     private function getDaily($results)
     {
         $dailies = array();
+        $today = date("Y/m");
+        $tmparray = explode("/",$today);
+        print_r($tmparray[0].'   '.$tmparray[1]);
         foreach ($results as $result) {
             $daily = new Daily();
             $daily->setId($result['id']);
