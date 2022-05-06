@@ -62,13 +62,17 @@ class QueryDaily extends connect
         return $articles[0];
     }
 
-    public function findAll()
+    //対象月の全データを取得する
+    public function findAll($tgtdate)
     {
-        $stmt = $this->dbh->prepare("SELECT * FROM articles WHERE is_delete=0 ORDER BY title DESC");
+        //SELECT tgtdate,sum(tgtmoney),sum(tgtcalory) FROM `records` where tgtdate like '2022/05%' GROUP by tgtdate
+        //SELECT tgtdate,sum(tgtmoney) as 'totalmoney',sum(tgtcalory)as 'totalcalory' FROM `records` where tgtdate like '2022/05%' GROUP by tgtdate order BY tgtdate asc;
+        $tgtdate .= '%';
+        $stmt = $this->dbh->prepare("SELECT  tgtdate,sum(tgtmoney) as 'totalmoney',sum(tgtcalory) as 'tgtcalory' FROM records WHERE LIKE :tgtdate group by tgtdate ORDER BY tgtdate DESC");
+        $stmt->bindParam(':tgtdate', $tgtdate, PDO::PARAM_STR);
         $stmt->execute();
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $articles = $this->getArticles($stmt->fetchAll(PDO::FETCH_ASSOC));
-        return $articles;
+        $dailies = $this->getDaily($stmt->fetchAll(PDO::FETCH_ASSOC));
+        return $dailies;
     }
 
     public function getPager($page = 1, $limit = 20, $month = null)
@@ -119,21 +123,19 @@ class QueryDaily extends connect
         return $return;
     }
 
-    private function getArticles($results)
+    private function getDaily($results)
     {
-        $articles = array();
+        $dailies = array();
         foreach ($results as $result) {
-            $article = new Article();
-            $article->setId($result['id']);
-            $article->setTitle($result['title']);
-            $article->setBody($result['body']);
-            $article->setFilename($result['filename']);
-            $article->setCategoryId($result['category_id']);
-            $article->setCreatedAt($result['created_at']);
-            $article->setUpdatedAt($result['updated_at']);
-            $articles[] = $article;
+            $daily = new Daily();
+            $daily->setId($result['id']);
+            $daily->setDate($result['tgtdate']);
+            $daily->setTotalCalory($result['totalcalory']);
+            $daily->setTotalMoney($result['totalmoney']);
+
+            $dailies[] = $daily;
         }
-        return $articles;
+        return $dailies;
     }
 
     public function delete()

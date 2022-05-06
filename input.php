@@ -12,7 +12,7 @@ if ((!empty($_POST['tgtdate']) && !empty($_POST['tgtcategory'])) || (!empty($_GE
   $tgtcalory = $_POST['tgtcalory'];
 
   $daily = new Daily();
-  $daily->setDate($tgtdate);
+  $daily->setDate(str_replace("-","/",$tgtdate));
   $daily->setCategory($tgtcategory);
   $daily->setItem($tgtitem);
   $daily->setMoney($tgtmoney);

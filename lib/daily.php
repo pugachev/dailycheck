@@ -8,6 +8,30 @@ class Daily
     private $tgtmoney = null;
     private $tgtcalory = null;
 
+    private $totalmoney=0;
+    private $toalcalory=0;
+
+    public function getTotalMoney()
+    {
+        return $this->totalmoney;
+    }
+
+    public function getTotalCalory()
+    {
+        return $this->toalcalory;
+    }
+
+    public function setTotalMoney($totalmoney)
+    {
+        $this->totalmoney = $totalmoney;
+    }
+
+    public function setTotalCalory($totalcalory)
+    {
+        $this->toalcalory = $totalcalory;
+    }
+
+
     public function save()
     {
         $queryDaily = new QueryDaily();
