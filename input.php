@@ -1,4 +1,31 @@
 <?php
+include 'lib/connect.php';
+include 'lib/daily.php';
+include 'lib/queryDaily.php';
+
+if ((!empty($_POST['tgtdate']) && !empty($_POST['tgtcategory'])) || (!empty($_GET['tgtitem']))) {
+
+  $tgtdate = $_POST['tgtdate'];
+  $tgtcategory = $_POST['tgtcategory'];
+  $tgtitem = $_POST['tgtitem'];
+  $tgtmoney = $_POST['tgtmoney'];
+  $tgtcalory = $_POST['tgtcalory'];
+
+  $daily = new Daily();
+  $daily->setDate($tgtdate);
+  $daily->setCategory($tgtcategory);
+  $daily->setItem($tgtitem);
+  $daily->setMoney($tgtmoney);
+  $daily->setCalory($tgtcalory);
+
+  $daily->save();
+
+
+}
+
+
+
+
 
 ?>
 <html lang="ja">
@@ -13,7 +40,7 @@
     />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/input.css" />
-    <title>レスポンシブ対応</title>
+    <title>入力画面</title>
   </head>
   <body>
   <?php include 'header.php';?>
@@ -21,7 +48,7 @@
 
 
 	<!-- メイン開始 -->
-  <form action="post" url="">
+  <form action="input.php" method="post">
     <table class="form-table">
       <tbody>
         <tr>
@@ -35,14 +62,14 @@
             <div class="category cate">
               <select name="tgtcategory">
                 <option value="" hidden>選ぶ</option>
-                <option value="1">食費</option>
-                <option value="2">日用品</option>
-                <option value="3">Amazon</option>
-                <option value="4">医療費</option>
-                <option value="5">公共料金</option>
-                <option value="6">税金</option>
-                <option value="7">外食</option>
-                <option value="8">その他</option>
+                <option value="食費">食費</option>
+                <option value="日用品">日用品</option>
+                <option value="Amazon">Amazon</option>
+                <option value="医療費">医療費</option>
+                <option value="公共料金">公共料金</option>
+                <option value="税金">税金</option>
+                <option value="外食">外食</option>
+                <option value="その他">その他</option>
               </select>
             </div>
           </td>
