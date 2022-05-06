@@ -62,14 +62,14 @@ class QueryDaily extends connect
     //     return $articles[0];
     // }
 
-    public function find($tgtmonthdate)
+    public function find($tgtyearmonthdate)
     {
-        $tgtmonthdate .= '%';
-        $stmt = $this->dbh->prepare("SELECT  * FROM records WHERE tgtmonthdate LIKE :tgtmonthdate");
-        $stmt->bindParam(':tgtmonthdate', $tgtmonthdate, PDO::PARAM_STR);
+        $tgtyearmonthdate .= '%';
+        $stmt = $this->dbh->prepare("SELECT  * FROM records WHERE tgtdate LIKE :tgtyearmonthdate");
+        $stmt->bindParam(':tgtyearmonthdate', $tgtyearmonthdate, PDO::PARAM_STR);
         $stmt->execute();
-        $articles = $this->getArticles($stmt->fetchAll(PDO::FETCH_ASSOC));
-        return $articles[0];
+        $articles = $this->getDailyData($stmt->fetchAll(PDO::FETCH_ASSOC));
+        return $articles;
     }
 
     //対象月の全データを取得する
@@ -132,9 +132,14 @@ class QueryDaily extends connect
         return $return;
     }
 
-    private function getDaily($results)
+    private function getDailyData($results)
     {
+        $dailies = array();
+        foreach ($results as $result) {
+            $dailies[]=array("id"=>$result["id"],"tgtcategory"=>$result["tgtcategory"],"tgtitem"=>$result["tgtitem"],"tgtmoney"=>$result["tgtmoney"],"tgtcalory"=>$result["tgtcalory"]);
+        }
 
+        return  $dailies;
     }
 
 

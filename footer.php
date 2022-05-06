@@ -12,8 +12,9 @@
 
     $("#mini-calendar tr td").click(function(){
         var tgtday = ('0'+$(this).find(".calendar-day-number").text()).slice(-2);
-        var tgtmonth = $(".calendar-year-month").text().replace('年','/').replace('月','');
-        var tgturl = "https://ikefukuro40.tech/dailycheck/list.php?month="+tgtmonth+"&day="+tgtday;
+        var tgtyearmonth = $(".calendar-year-month").text().replace('年','/').replace('月','');
+        // var tgturl = "https://ikefukuro40.tech/dailycheck/list.php?yearmonth="+tgtyearmonth+"&day="+tgtday;
+        var tgturl = "http://localhost/dailycheck/list.php?yearmonth="+tgtyearmonth+"&day="+tgtday;
         location.href = tgturl;
     });
 	});

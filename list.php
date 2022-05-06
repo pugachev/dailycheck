@@ -4,12 +4,14 @@
   include 'lib/queryDaily.php';
 
   //カレンダー画面から取得した「月」と「日」
-  $month = $_GET['month'];
-  $day = $_GET['date'];
+  $yearmonth = $_GET['yearmonth'];
+  $day = $_GET['day'];
+
+  $tgtyearmonthdate=$yearmonth.'/'.$day;
   $daily = new QueryDaily();
-  $results = $daily->findAll($today);
+  $results = $daily->find($tgtyearmonthdate);
 
-
+ 
 ?>
 <html lang="ja">
   <head>
@@ -35,115 +37,20 @@
               <div class="tgthead">カロリー計:1580</div>
             </div>
             <tbody>
-                <tr>
-                    <th>出費</th>
-                    <td>1200円</td>
-                    <th>カテゴリー</th>
-                    <td>食品</td>
-                    <th>品目</th>
-                    <td>うどん</td>
-                    <th>カロリー</th>
-                    <td>450kcal</td>
-                </tr>
-                <tr>
-                    <th>出費</th>
-                    <td>4440円</td>
-                    <th>カテゴリー</th>
-                    <td>公共料金</td>
-                    <th>品目</th>
-                    <td>水道代</td>
-                    <th>カロリー</th>
-                    <td>0kcal</td>
-                </tr>
-                <tr>
-                    <th>出費</th>
-                    <td>1080円</td>
-                    <th>カテゴリー</th>
-                    <td>食品</td>
-                    <th>品目</th>
-                    <td>うどん焼き</td>
-                    <th>カロリー</th>
-                    <td>831kcal</td>
-                </tr>
-                <tr>
-                    <th>出費</th>
-                    <td>6350円</td>
-                    <th>カテゴリー</th>
-                    <td>Amazon</td>
-                    <th>品目</th>
-                    <td>キーボード</td>
-                    <th>カロリー</th>
-                    <td>0kcal</td>
-                </tr>
-                <tr>
-                    <th>出費</th>
-                    <td>1200円</td>
-                    <th>カテゴリー</th>
-                    <td>食品</td>
-                    <th>品目</th>
-                    <td>うどん</td>
-                    <th>カロリー</th>
-                    <td>450kcal</td>
-                </tr>
-                <tr>
-                    <th>出費</th>
-                    <td>1200円</td>
-                    <th>カテゴリー</th>
-                    <td>食品</td>
-                    <th>品目</th>
-                    <td>うどん</td>
-                    <th>カロリー</th>
-                    <td>450kcal</td>
-                </tr>
-                <tr>
-                    <th>出費</th>
-                    <td>1200円</td>
-                    <th>カテゴリー</th>
-                    <td>食品</td>
-                    <th>品目</th>
-                    <td>うどん</td>
-                    <th>カロリー</th>
-                    <td>450kcal</td>
-                </tr>                <tr>
-                    <th>出費</th>
-                    <td>6350円</td>
-                    <th>カテゴリー</th>
-                    <td>Amazon</td>
-                    <th>品目</th>
-                    <td>キーボード</td>
-                    <th>カロリー</th>
-                    <td>0kcal</td>
-                </tr>
-                <tr>
-                    <th>出費</th>
-                    <td>1200円</td>
-                    <th>カテゴリー</th>
-                    <td>食品</td>
-                    <th>品目</th>
-                    <td>うどん</td>
-                    <th>カロリー</th>
-                    <td>450kcal</td>
-                </tr>
-                <tr>
-                    <th>出費</th>
-                    <td>1200円</td>
-                    <th>カテゴリー</th>
-                    <td>食品</td>
-                    <th>品目</th>
-                    <td>うどん</td>
-                    <th>カロリー</th>
-                    <td>450kcal</td>
-                </tr>
-                <tr>
-                    <th>出費</th>
-                    <td>1200円</td>
-                    <th>カテゴリー</th>
-                    <td>食品</td>
-                    <th>品目</th>
-                    <td>うどん</td>
-                    <th>カロリー</th>
-                    <td>450kcal</td>
-                </tr>				
+              <?php 
+                foreach($results as $result){
+                  echo "<tr>";
+                  echo "<th>出費</th>";
+                  echo "<td>".$result["tgtmoney"]."</td>";
+                  echo "<th>カテゴリー</th>";
+                  echo "<td>".$result["tgtcategory"]."</td>";
+                  echo "<th>品目</th>";
+                  echo "<td>".$result["tgtitem"]."</td>";
+                  echo "<th>カロリー</th>";
+                  echo "<td>".$result["tgtcalory"]."</td>";
+                  echo "</tr>";
+                }
+              ?>
             </tbody>
         </table>
     </main>
