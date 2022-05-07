@@ -157,7 +157,7 @@ class QueryDaily extends connect
         $tmp=array();
         foreach ($results as $result) {
             $day = explode("/",$result['tgtdate'])[2];
-            $tmp[] =array('day'=>abs($day),"title"=>$result['totalmoney'],"type"=>"blue");
+            $tmp[] =array('day'=>abs($day),"title"=>'出費計: '.$result['totalmoney'].' 円   カロリー計: '.$result['totalcalory'].' kcal ',"type"=>"blue");
         }
         $dailies['event'] = $tmp;
         $dailies['holiday']= array("9","12","25");
