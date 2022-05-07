@@ -15,6 +15,9 @@
             <li>
               <a href="https://ikefukuro40.tech/dailycheck/serach.php" class="btn-square-pop">検索画面</a>
             </li>
+            <li>
+              <a href="https://ikefukuro40.tech/dailycheck/regi.php" class="btn-square-pop">設定画面</a>
+            </li>
           </ul>
         </div>
         <div class="headerC">
@@ -37,6 +40,9 @@
             </li>
             <li>
               <a href="https://ikefukuro40.tech/dailycheck/serach.php" class="btn-square-pop">検索画面</a>
+            </li>
+            <li>
+              <a href="https://ikefukuro40.tech/dailycheck/regi.php" class="btn-square-pop">設定画面</a>
             </li>
         </ul>
       </div>
