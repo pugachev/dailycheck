@@ -33,7 +33,7 @@ if ((!empty($_POST['tgtdate']) && !empty($_POST['tgtcategory'])) || (!empty($_GE
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/input.css" />
+    <link rel="stylesheet" href="css/search.css" />
     <title>入力画面</title>
   </head>
   <body>

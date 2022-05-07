@@ -1,26 +1,5 @@
 <?php
-include 'lib/connect.php';
-include 'lib/daily.php';
-include 'lib/queryDaily.php';
 
-if ((!empty($_POST['tgtdate']) && !empty($_POST['tgtcategory'])) || (!empty($_GET['tgtitem']))) {
-
-  $tgtdate = $_POST['tgtdate'];
-  $tgtcategory = $_POST['tgtcategory'];
-  $tgtitem = $_POST['tgtitem'];
-  $tgtmoney = $_POST['tgtmoney'];
-  $tgtcalory = $_POST['tgtcalory'];
-
-  $daily = new Daily();
-  $daily->setDate(str_replace("-","/",$tgtdate));
-  $daily->setCategory($tgtcategory);
-  $daily->setItem($tgtitem);
-  $daily->setMoney($tgtmoney);
-  $daily->setCalory($tgtcalory);
-
-  $daily->save();
-
-}
 ?>
 <html lang="ja">
   <head>
