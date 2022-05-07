@@ -8,6 +8,8 @@ if ((!empty($_GET['tgtyyyymm'])))
 {
     //「前月へ」と「翌月へ」から取得したyyyyMMを使用する
     $today = $_GET['tgtyyyymm'];
+    print_r($today);
+    die();
 }
 else
 {

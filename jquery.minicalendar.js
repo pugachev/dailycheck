@@ -46,7 +46,7 @@
       var nextyyyyMM=this.year+'/'+('0'+(this.month+1)).slice(-2);
       console.log(prevyyyyMM);
       // this.ele.append('<div class="calendar-head"><p class="prev">   前月へ   </p><p class="calendar-year-month"></p><p class="next">   翌月へ   </p></div>');
-      this.ele.append('<div class="calendar-head"><a class=prev href="https://ikefukuro40.tech/dailycheck/calendar.php?tgtyyyymm="'+prevyyyyMM+'">   前月へ   </a><p class="calendar-year-month"></p><a class=prev href="https://ikefukuro40.tech/dailycheck/calendar.php?tgtyyyymm="'+nextyyyyMM+'">   翌月へ   </a>');
+      this.ele.append('<div class="calendar-head"><a href="https://ikefukuro40.tech/dailycheck/calendar.php?tgtyyyymm="'+prevyyyyMM+' class=prev ">   前月へ   </a><p class="calendar-year-month"></p><a class=prev href="https://ikefukuro40.tech/dailycheck/calendar.php?tgtyyyymm="'+nextyyyyMM+'">   翌月へ   </a>');
       var outText = '<table><thead><tr>';
       for (var i = 0; i < this.opts.weekType.length; i++) {
         if (i === 0) {
