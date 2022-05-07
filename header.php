@@ -7,10 +7,14 @@
         <div class="headerB">
           <ul id="headerBmenu">
             <li>
-              <a href="" class="btn-square-pop">指宿</a>
+              <a href="https://ikefukuro40.tech/dailycheck/index.php" class="btn-square-pop">一覧画面</a>
             </li>
-            <li><a href="" class="btn-square-pop">博多</a></li>
-            <li><a href="" class="btn-square-pop">大分</a></li>
+            <li>
+              <a href="https://ikefukuro40.tech/dailycheck/input.php" class="btn-square-pop">入力画面</a>
+            </li>
+            <li>
+              <a href="https://ikefukuro40.tech/dailycheck/serach.php" class="btn-square-pop">検索画面</a>
+            </li>
           </ul>
         </div>
         <div class="headerC">
@@ -25,13 +29,15 @@
       <div class="headerBack">
         <p id="tojiru">×閉じる</p>
         <ul>
-          <li>
-            <a href="https://searchman.info/p_touroku.html">メルマガ</a>
-          </li>
-          <li>
-            <a href="https://searchman.info/sub.html">連絡</a>
-          </li>
-          <li><a href="https://searchman.info/intro.html">特定商取引</a></li>
+        <li>
+              <a href="https://ikefukuro40.tech/dailycheck/index.php" class="btn-square-pop">一覧画面</a>
+            </li>
+            <li>
+              <a href="https://ikefukuro40.tech/dailycheck/input.php" class="btn-square-pop">入力画面</a>
+            </li>
+            <li>
+              <a href="https://ikefukuro40.tech/dailycheck/serach.php" class="btn-square-pop">検索画面</a>
+            </li>
         </ul>
       </div>
     </header>
