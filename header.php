@@ -7,7 +7,7 @@
         <div class="headerB">
           <ul id="headerBmenu">
             <li>
-              <a href="http://localhost/dailycheck/index.php" class="btn-square-pop">一覧画面</a>
+              <a href="http://localhost/dailycheck/index.php" class="btn-square-pop">カレンダー画面</a>
             </li>
             <li>
               <a href="http://localhost/dailycheck/input.php" class="btn-square-pop">入力画面</a>
@@ -33,7 +33,7 @@
         <p id="tojiru">×閉じる</p>
         <ul>
         <li>
-              <a href="http://localhost/dailycheck/index.php" class="btn-square-pop">一覧画面</a>
+              <a href="http://localhost/dailycheck/index.php" class="btn-square-pop">カレンダー画面</a>
             </li>
             <li>
               <a href="http://localhost/dailycheck/input.php" class="btn-square-pop">入力画面</a>
