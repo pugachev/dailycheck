@@ -20,13 +20,7 @@ if ((!empty($_POST['tgtdate']) && !empty($_POST['tgtcategory'])) || (!empty($_GE
 
   $daily->save();
 
-
 }
-
-
-
-
-
 ?>
 <html lang="ja">
   <head>

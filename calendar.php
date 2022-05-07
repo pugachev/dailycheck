@@ -8,8 +8,6 @@ if ((!empty($_GET['tgtyyyymm'])))
 {
     //「前月へ」と「翌月へ」から取得したyyyyMMを使用する
     $today = $_GET['tgtyyyymm'];
-    print_r($today);
-    die();
 }
 else
 {
@@ -17,8 +15,11 @@ else
     $today = date("Y/m");
 }
 
+
+
 $daily = new QueryDaily();
 $results = $daily->findAll($today);
+
 
 $json=json_encode($results,JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
 

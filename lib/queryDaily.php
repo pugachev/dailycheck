@@ -75,11 +75,12 @@ class QueryDaily extends connect
     //対象月の全データを取得する
     public function findAll($tgtdate)
     {
+        $tmp = $tgtdate;
         $tgtdate .= '%';
         $stmt = $this->dbh->prepare("SELECT  tgtdate,sum(tgtmoney) as 'totalmoney',sum(tgtcalory) as 'totalcalory' FROM records WHERE tgtdate LIKE :tgtdate group by tgtdate ORDER BY tgtdate DESC");
         $stmt->bindParam(':tgtdate', $tgtdate, PDO::PARAM_STR);
         $stmt->execute();
-        $dailies = $this->getMonthlyData($stmt->fetchAll(PDO::FETCH_ASSOC));
+        $dailies = $this->getMonthlyData($tmp,$stmt->fetchAll(PDO::FETCH_ASSOC));
 
         return $dailies;
     }
@@ -143,11 +144,12 @@ class QueryDaily extends connect
     }
 
 
-    private function getMonthlyData($results)
+    private function getMonthlyData($tgtdate,$results)
     {
         $dailies = array();
 
-        $today = date("Y/m");
+        // $today = date("Y/m");
+        $today = $tgtdate;
         $tmparray = explode("/",$today);
         $dailies['year']=$tmparray[0];
         $dailies['month']=$tmparray[1];

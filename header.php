@@ -7,16 +7,16 @@
         <div class="headerB">
           <ul id="headerBmenu">
             <li>
-              <a href="https://ikefukuro40.tech/dailycheck/index.php" class="btn-square-pop">一覧画面</a>
+              <a href="http://localhost/dailycheck/index.php" class="btn-square-pop">一覧画面</a>
             </li>
             <li>
-              <a href="https://ikefukuro40.tech/dailycheck/input.php" class="btn-square-pop">入力画面</a>
+              <a href="http://localhost/dailycheck/input.php" class="btn-square-pop">入力画面</a>
             </li>
             <li>
-              <a href="https://ikefukuro40.tech/dailycheck/serach.php" class="btn-square-pop">検索画面</a>
+              <a href="http://localhost/dailycheck/serach.php" class="btn-square-pop">検索画面</a>
             </li>
             <li>
-              <a href="https://ikefukuro40.tech/dailycheck/regi.php" class="btn-square-pop">設定画面</a>
+              <a href="http://localhost/dailycheck/regi.php" class="btn-square-pop">設定画面</a>
             </li>
           </ul>
         </div>
@@ -33,16 +33,16 @@
         <p id="tojiru">×閉じる</p>
         <ul>
         <li>
-              <a href="https://ikefukuro40.tech/dailycheck/index.php" class="btn-square-pop">一覧画面</a>
+              <a href="http://localhost/dailycheck/index.php" class="btn-square-pop">一覧画面</a>
             </li>
             <li>
-              <a href="https://ikefukuro40.tech/dailycheck/input.php" class="btn-square-pop">入力画面</a>
+              <a href="http://localhost/dailycheck/input.php" class="btn-square-pop">入力画面</a>
             </li>
             <li>
-              <a href="https://ikefukuro40.tech/dailycheck/serach.php" class="btn-square-pop">検索画面</a>
+              <a href="http://localhost/dailycheck/serach.php" class="btn-square-pop">検索画面</a>
             </li>
             <li>
-              <a href="https://ikefukuro40.tech/dailycheck/regi.php" class="btn-square-pop">設定画面</a>
+              <a href="http://localhost/dailycheck/regi.php" class="btn-square-pop">設定画面</a>
             </li>
         </ul>
       </div>

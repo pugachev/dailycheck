@@ -10,31 +10,63 @@
  */
 
 ;(function($) {
+
+
+
   $.wop = $.wop || {};
   $.wop.miniCalendar = function(targets,option){
     this.opts = $.extend({},$.wop.miniCalendar.defaults,option);
     this.ele = targets;
 
+    // console.log(option);
+
+
     // jsonファイルから読み込んだデータを入れる変数
     this.events = {};
-    this.date = new Date();
+
     this.month = "";
     this.year = "";
     this.holiday = "";
 
+
+    if(option!=''&&option.length>0){
+      this.date = option;
+      this.year = option.split('/')[0];
+      this.month =  option.split('/')[1];
+      this.prevyyyyMM=this.year+'/'+('0'+(Number(this.month)-1)).slice(-2);
+      this.nextyyyyMM=this.year+'/'+('0'+(Number(this.month)+1)).slice(-2);
+    }else{
+      this.date = new Date();
+      //表示する年月
+      this.year = this.year || new Date().getFullYear();
+      this.month = this.month || new Date().getMonth()+1;
+      this.prevyyyyMM=this.year+'/'+('0'+(Number(this.month)-1)).slice(-2);
+      this.nextyyyyMM=this.year+'/'+('0'+(Number(this.month)+1)).slice(-2);
+      this.month = ('0'+this.month).slice(-2);
+    }
+
+
+    console.log(this.prevyyyyMM);
+    console.log(this.nextyyyyMM);
+
+    this.prevURL = "http://localhost/dailycheck/index.php?tgtyyyymm="+this.prevyyyyMM;
+    this.nextURL = "http://localhost/dailycheck/index.php?tgtyyyymm="+this.nextyyyyMM;
     // jsonファイルから読み込む
     this.loadData();
 
-    //表示する年月
-    this.year = this.year || new Date().getFullYear();
-    this.month = this.month || new Date().getMonth()+1;
+
 
     this.createFrame();
     this.printType(this.year, this.month);
     // 取得したイベントを表示
     this.setEvent();
   };
+
   $.wop.miniCalendar.prototype = {
+
+    // test: function(){
+    //   console.log("test");
+    // },
 
     /**
      * 枠を作成
@@ -44,9 +76,10 @@
       var prevyyyyMM=this.year+'/'+('0'+(this.month-1)).slice(-2);
       // var tmpmonth = (this.month+1);
       var nextyyyyMM=this.year+'/'+('0'+(this.month+1)).slice(-2);
-      console.log(prevyyyyMM);
+      // console.log(prevyyyyMM);
       // this.ele.append('<div class="calendar-head"><p class="prev">   前月へ   </p><p class="calendar-year-month"></p><p class="next">   翌月へ   </p></div>');
-      this.ele.append('<div class="calendar-head"><a href="https://ikefukuro40.tech/dailycheck/calendar.php?tgtyyyymm="'+prevyyyyMM+' class=prev ">   前月へ   </a><p class="calendar-year-month"></p><a class=prev href="https://ikefukuro40.tech/dailycheck/calendar.php?tgtyyyymm="'+nextyyyyMM+'">   翌月へ   </a>');
+      this.ele.append('<div class="calendar-head"><a href="'+this.prevURL+'" class=prev ">   前月へ   </a><p class="calendar-year-month"></p><a href="'+this.nextURL+'" class=prev ">   翌月へ   </a>');
+      // this.ele.append('<div class="calendar-head"><a href="https://ikefukuro40.tech/dailycheck/calendar.php?tgtyyyymm=2022/04">   前月へ   </a><p class="calendar-year-month"></p><a class=prev href="https://ikefukuro40.tech/dailycheck/calendar.php?tgtyyyymm="'+nextyyyyMM+'">   翌月へ   </a>');
       var outText = '<table><thead><tr>';
       for (var i = 0; i < this.opts.weekType.length; i++) {
         if (i === 0) {
@@ -154,9 +187,10 @@
      */
     loadData : function() {
       var self = this;
+      var tgtyearmonth=self.year+'/'+self.month;
       $.ajax({
         type: "GET",
-        url: "https://ikefukuro40.tech/dailycheck/calendar.php",
+        url: "http://localhost/dailycheck/calendar.php?tgtyyyymm="+tgtyearmonth,
         dataType: "json",
         async: false,
         success: function(data){
