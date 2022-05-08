@@ -1,16 +1,18 @@
 <?php
-class QuerySetting extends connect
+class QuerySearch extends connect
 {
-    private $setting;
+    private $search;
 
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function setSetting(Setting $setting)
+    public function search()
     {
-        $this->setting = $setting;
+        
+
+
     }
 
     public function save()
