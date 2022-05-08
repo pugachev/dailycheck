@@ -14,15 +14,16 @@
 
   //カレンダー画面から取得した「月」と「日」
   // $yearmonth = $_GET['yearmonth'];
-  $yearmonth = '2022/04';
-  // $day = $_GET['day'];
-  $day = '17';
-
-  $tgtyearmonthdate=$yearmonth.'/'.$day;
-  $daily = new QueryDaily();
-  $results = $daily->find($tgtyearmonthdate);
-
  
+  // $day = $_GET['day'];
+
+
+  // $yearmonth = '2022/04';
+  // $day = '17';
+  // $tgtyearmonthdate=$yearmonth.'/'.$day;
+  // $daily = new QueryDaily();
+  // $results = $daily->find($tgtyearmonthdate);
+
 ?>
 <html lang="ja">
   <head>
@@ -74,36 +75,32 @@
         </tbody>
       </table>
     </form>
-    <table  class="result-table">
-            <div class="headinfo">
-              <div class="tgthead">2022年05月05日</div>
-              <div class="tgthead">出費計:3000</div>
-              <div class="tgthead">カロリー計:1580</div>
-            </div>
-            <tbody>
-              <?php 
-                if(!empty($results))
-                {
-                  foreach($results as $result){
-                    echo "<tr>";
-                    echo "<th>出費</th>";
-                    echo "<td>".$result["tgtmoney"]."</td>";
-                    echo "<th>カテゴリー</th>";
-                    echo "<td>".$result["tgtcategory"]."</td>";
-                    echo "<th>品目</th>";
-                    echo "<td>".$result["tgtitem"]."</td>";
-                    echo "<th>カロリー</th>";
-                    echo "<td>".$result["tgtcalory"]."</td>";
-                    echo "</tr>";
-                  }
-                }
-                else
-                {
-                    echo "データが存在しません";
-                }
-              ?>
-            </tbody>
-        </table>
+    <?php 
+      if(!empty($results))
+      {
+         echo '<table  class="result-table">';
+         echo '<tbody>';
+        foreach($results as $result)
+        {
+          echo "<tr>";
+          echo "<th>出費</th>";
+          echo "<td>".$result["tgtmoney"]."</td>";
+          echo "<th>カテゴリー</th>";
+          echo "<td>".$result["tgtcategory"]."</td>";
+          echo "<th>品目</th>";
+          echo "<td>".$result["tgtitem"]."</td>";
+          echo "<th>カロリー</th>";
+          echo "<td>".$result["tgtcalory"]."</td>";
+          echo "</tr>";
+        }
+        echo '</tbody>';
+        echo '</table>';
+      }
+      else
+      {
+          echo '<div id="alert">データは存在しません！</div>';
+      }
+   ?>
     </main>
     <footer>
       <div class="copy">

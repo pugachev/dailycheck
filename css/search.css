@@ -38,6 +38,14 @@ input[type="date"] {
   color: #999;
 }
 
+#alert{
+  text-align: center;
+  width: 70%;
+  margin: 55px auto;
+  font-size:36px;
+  color:red;
+}
+
 .search-table {
     width: 70%;
   }
