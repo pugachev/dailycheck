@@ -1,8 +1,8 @@
 <header>
       <div class="headerFront">
         <div class="headerA">
-          <p class="logo">TravelMemo</p>
-          <p class="descA">思い出に残った旅先の記録</p>
+          <p class="logo">DailyCheck</p>
+          <p class="descA">何か発見があるかもしれない日々の記録</p>
         </div>
         <div class="headerB">
           <ul id="headerBmenu">
@@ -13,10 +13,10 @@
               <a href="http://localhost/dailycheck/input.php" class="btn-square-pop">入力画面</a>
             </li>
             <li>
-              <a href="http://localhost/dailycheck/serach.php" class="btn-square-pop">検索画面</a>
+              <a href="http://localhost/dailycheck/search.php" class="btn-square-pop">検索画面</a>
             </li>
             <li>
-              <a href="http://localhost/dailycheck/regi.php" class="btn-square-pop">設定画面</a>
+              <a href="http://localhost/dailycheck/setting.php" class="btn-square-pop">設定画面</a>
             </li>
           </ul>
         </div>
@@ -39,10 +39,10 @@
               <a href="http://localhost/dailycheck/input.php" class="btn-square-pop">入力画面</a>
             </li>
             <li>
-              <a href="http://localhost/dailycheck/serach.php" class="btn-square-pop">検索画面</a>
+              <a href="http://localhost/dailycheck/search.php" class="btn-square-pop">検索画面</a>
             </li>
             <li>
-              <a href="http://localhost/dailycheck/regi.php" class="btn-square-pop">設定画面</a>
+              <a href="http://localhost/dailycheck/setting.php" class="btn-square-pop">設定画面</a>
             </li>
         </ul>
       </div>

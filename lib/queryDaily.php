@@ -64,11 +64,21 @@ class QueryDaily extends connect
 
     public function find($tgtyearmonthdate)
     {
-        $tgtyearmonthdate .= '%';
+
         $stmt = $this->dbh->prepare("SELECT  * FROM records WHERE tgtdate LIKE :tgtyearmonthdate");
         $stmt->bindParam(':tgtyearmonthdate', $tgtyearmonthdate, PDO::PARAM_STR);
         $stmt->execute();
         $articles = $this->getDailyData($stmt->fetchAll(PDO::FETCH_ASSOC));
+        return $articles;
+    }
+
+    public function findTotalByDaily($tgtyearmonthdate)
+    {
+        //SELECT tgtdate,sum(tgtmoney) as totalmoeny,sum(tgtcalory) as totalcalory FROM `records` where tgtdate = '2022/04/28'group by tgtdate
+        $stmt = $this->dbh->prepare("SELECT tgtdate,sum(tgtmoney) as totalmoeny,sum(tgtcalory) as totalcalory FROM `records` where tgtdate=:tgtyearmonthdate group by tgtdate");
+        $stmt->bindParam(':tgtyearmonthdate', $tgtyearmonthdate, PDO::PARAM_STR);
+        $stmt->execute();
+        $articles = $this->getToalDataByDay($stmt->fetchAll(PDO::FETCH_ASSOC));
         return $articles;
     }
 
@@ -144,6 +154,17 @@ class QueryDaily extends connect
     }
 
 
+    private function getToalDataByDay($results)
+    {
+        $dailies = "";
+        foreach ($results as $result) {
+            $dailies=array("tgtdate"=>$result["tgtdate"],"totalmoeny"=>$result["totalmoeny"],"totalcalory"=>$result["totalcalory"]);
+        }
+
+        return  $dailies;
+    }
+
+
     private function getMonthlyData($tgtdate,$results)
     {
         $dailies = array();
@@ -165,13 +186,19 @@ class QueryDaily extends connect
         return $dailies;
     }
 
-    public function delete()
+    public function update($id,$tgtmoney,$tgtcalory)
     {
-        if ($this->article->getId()) {
-            $id = $this->article->getId();
-            $stmt = $this->dbh->prepare("UPDATE articles SET is_delete=1 WHERE id=:id");
-            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-            $stmt->execute();
-        }
+        $stmt = $this->dbh->prepare("UPDATE records SET tgtmoney=:tgtmoney, tgtcalory=:tgtcalory,updated_at=NOW() WHERE id=:id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':tgtmoney', $tgtmoney, PDO::PARAM_INT);
+        $stmt->bindParam(':tgtcalory', $tgtcalory, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+    public function delete($id)
+    {
+        $stmt = $this->dbh->prepare("delete from records WHERE id=:id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
     }
 }

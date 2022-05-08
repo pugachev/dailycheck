@@ -3,7 +3,7 @@ include 'lib/connect.php';
 include 'lib/daily.php';
 include 'lib/queryDaily.php';
 
-if ((!empty($_POST['tgtdate']) && !empty($_POST['tgtcategory'])) || (!empty($_GET['tgtitem']))) {
+if ((!empty($_POST['tgtdate']) || !empty($_POST['tgtcategory'])) || (!empty($_GET['tgtitem']))) {
 
   $tgtdate = $_POST['tgtdate'];
   $tgtcategory = $_POST['tgtcategory'];
@@ -19,6 +19,8 @@ if ((!empty($_POST['tgtdate']) && !empty($_POST['tgtcategory'])) || (!empty($_GE
   $daily->setCalory($tgtcalory);
 
   $daily->save();
+
+  header('Location: index.php');
 
 }
 ?>

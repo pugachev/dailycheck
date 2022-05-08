@@ -3,14 +3,39 @@
   include 'lib/daily.php';
   include 'lib/queryDaily.php';
 
+  //「修正」or「削除」ボタン押下時に処理
+  if ((!empty($_POST['id']) || !empty($_POST['tgtmoney']) || !empty($_POST['tgtcalory'])))
+   {
+    //「修正」の場合
+    if(!empty($_POST['modify']))
+    {
+      $id = $_POST['id'];
+      $tgtmoney = $_POST['tgtmoney'];
+      $tgtcalory  = $_POST['tgtcalory'];
+
+      $daily = new QueryDaily();
+      $daily->update($id,$tgtmoney,$tgtcalory);
+
+    }
+     //「削除」の場合
+    else if(!empty($_POST['delete']))
+    {
+      $id = $_POST['id'];
+      $daily = new QueryDaily();
+      $daily->delete($id);
+    }
+
+    header('Location: index.php');
+
+  }
+
   //カレンダー画面から取得した「月」と「日」
   $yearmonth = $_GET['yearmonth'];
   $day = $_GET['day'];
-
   $tgtyearmonthdate=$yearmonth.'/'.$day;
   $daily = new QueryDaily();
   $results = $daily->find($tgtyearmonthdate);
-
+  $head_reqults = $daily->findTotalByDaily($tgtyearmonthdate);
  
 ?>
 <html lang="ja">
@@ -30,29 +55,37 @@
   <body>
   <?php include 'header.php';?>
     <main>
-	<table>
+      
+	        <table>
             <div class="headinfo">
-              <div class="tgthead">2022年05月05日</div>
-              <div class="tgthead">出費計:3000</div>
-              <div class="tgthead">カロリー計:1580</div>
+              <div class="tgthead"><?php echo  $tgtyearmonthdate; ?></div>
+              <div class="tgthead">出費計:<?php echo $head_reqults['totalmoeny']; ?> 円</div>
+              <div class="tgthead">カロリー計:<?php echo $head_reqults['totalcalory']; ?> Kcal</div>
             </div>
             <tbody>
               <?php 
                 foreach($results as $result){
                   echo "<tr>";
+                  echo "<form action='list.php' method='post'>";
+                  echo "<th>ID</th>";
+                  echo '<td><input type="text" value='.$result["id"].' name="id" ></td>';
                   echo "<th>出費</th>";
-                  echo "<td>".$result["tgtmoney"]."</td>";
+                  echo '<td><input type="text" value='.$result["tgtmoney"].' name="tgtmoney" ></td>';
                   echo "<th>カテゴリー</th>";
                   echo "<td>".$result["tgtcategory"]."</td>";
                   echo "<th>品目</th>";
                   echo "<td>".$result["tgtitem"]."</td>";
                   echo "<th>カロリー</th>";
-                  echo "<td>".$result["tgtcalory"]."</td>";
+                  echo '<td><input type="text" value='.$result["tgtcalory"].' name="tgtcalory" ></td>';
+                  echo "<td><button class='button' name='modify' value='1' >修正</button></td>";
+                  echo "<td><button class='button' name='delete' value='2' >削除</button></td>";
+                  echo "</form>";
                   echo "</tr>";
                 }
               ?>
             </tbody>
-        </table>
+         </table>
+        </form>
     </main>
     <footer>
       <div class="copy">
