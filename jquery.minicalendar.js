@@ -101,7 +101,7 @@
      */
     printType : function(thisYear, thisMonth) {
 
-      $(this.ele).find('.calendar-year-month').text(thisYear + '年' + thisMonth　+ '月');
+      $(this.ele).find('.calendar-year-month').text(thisYear + '年' + thisMonth + '月');
       var thisDate = new Date(thisYear, thisMonth-1, 1);
 
       // 開始の曜日
