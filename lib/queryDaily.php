@@ -1,4 +1,7 @@
 <?php
+include 'lib/setting.php';
+include 'lib/querySetting.php';
+
 class QueryDaily extends connect
 {
     private $daily;
@@ -174,11 +177,21 @@ class QueryDaily extends connect
         $tmparray = explode("/",$today);
         $dailies['year']=$tmparray[0];
         $dailies['month']=$tmparray[1];
+        
+        //既存の値を取得して画面にだす
+        $setting = new QuerySetting();
+        $settings = $setting->find();
 
         $tmp=array();
         foreach ($results as $result) {
             $day = explode("/",$result['tgtdate'])[2];
-            $tmp[] =array('day'=>abs($day),"title"=>'出費計: '.$result['totalmoney'].' 円   カロリー計: '.$result['totalcalory'].' kcal ',"type"=>"blue");
+             if((intval($result['totalcalory']) > intval($settings["tgtmaxcalory"])) || (intval($result['totalmoney']) > intval($settings["tgtmaxmoney"])) )
+            {
+                $tmp[] =array('day'=>abs($day),"title"=>'出費計: '.$result['totalmoney'].' 円   カロリー計: '.$result['totalcalory'].' kcal ',"type"=>"red");
+            }else{
+                $tmp[] =array('day'=>abs($day),"title"=>'出費計: '.$result['totalmoney'].' 円   カロリー計: '.$result['totalcalory'].' kcal ',"type"=>"blue");
+            }
+            
         }
         $dailies['event'] = $tmp;
         $dailies['holiday']= array("9","12","25");
