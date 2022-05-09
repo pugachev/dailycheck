@@ -8,9 +8,49 @@ class QuerySearch extends connect
         parent::__construct();
     }
 
-    public function search()
+    /**
+     * 日付パラメータが1個の場合
+     * 日付パラメータが2個の場合
+     * カテゴリーがある場合
+     */
+    public function search($from,$to)
     {
-        
+
+        $sql = "select * from records where tgtdate between from=:from and to=:to";
+
+        if(!empty($from) && !empty($to))
+        {
+            $stmt = $this->dbh->prepare("SELECT * from records WHERE tgtdate BETWEEN :from AND :to order by tgtdate "); 
+            $tmpfrom = str_replace('-','/',$from);
+            $tmpto=str_replace('-','/',$to);
+            $stmt->bindParam(':from', $tmpfrom, PDO::PARAM_STR);
+            $stmt->bindParam(':to', $tmpto, PDO::PARAM_STR);
+        }
+        else if(!empty($from))
+        {
+            $stmt = $this->dbh->prepare("select * from records where tgtdate > :from order by tgtdate"); 
+            $tmpfrom = str_replace('-','/',$from);
+            $stmt->bindParam(':from', $tmpfrom, PDO::PARAM_STR);
+        }
+        else if(!empty($to))
+        {
+            $stmt = $this->dbh->prepare("select * from records where tgtdate < :to order by tgtdate"); 
+            $tmpto=str_replace('-','/',$to);
+            $stmt->bindParam(':to', $tmpto, PDO::PARAM_STR);
+        }
+
+        // if(!empty($cate) && (!empty($from) || !empty($to)))
+        // {
+        //     $sql .= " and tgtcategory=".$cate;
+        // }
+        // else
+        // {
+        //     $sql .= " tgtcategory=".$cate;
+        // }
+        $stmt->execute();
+        // $stmt->debugDumpParams();
+        $setting = $this->getSearchData($stmt->fetchAll(PDO::FETCH_ASSOC));
+        return $setting;
 
 
     }
@@ -40,6 +80,16 @@ class QuerySearch extends connect
         $stmt->bindParam(':tgtmaxmoney', $tgtmaxmoney, PDO::PARAM_INT);
         $stmt->bindParam(':tgtmailaddress', $tgtmailaddress, PDO::PARAM_STR);
         $stmt->execute();
+    }
+
+    private function getSearchData($results)
+    {
+        $dailies = array();
+        foreach ($results as $result) {
+            $dailies[]=array("tgtdate"=>$result["tgtdate"],"tgtcategory"=>$result["tgtcategory"],"tgtitem"=>$result["tgtitem"],"tgtmoney"=>$result["tgtmoney"],"tgtcalory"=>$result["tgtcalory"]);
+        }
+
+        return  $dailies;
     }
 
     public function find()

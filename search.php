@@ -2,13 +2,18 @@
   include 'lib/connect.php';
   include 'lib/daily.php';
   include 'lib/queryDaily.php';
-
+  include 'lib/querySearch.php';
 
   //画面から取得した検索項目を受け取る
-  if ((!empty($_POST['tgtFromdate']) || !empty($_POST['tgtTodate'])) || (!empty($_GET['tgtcategory'])))
+  if ((!empty($_POST['tgtFromdate']) || !empty($_POST['tgtTodate'])))
   {
-
-
+    // print_r($_POST['tgtFromdate'].'   '.$_POST['tgtTodate']);
+    // die();
+    //画面から渡された条件で検索する
+    $search = new QuerySearch();
+    $results = $search->search($_POST['tgtFromdate'],$_POST['tgtTodate']);
+    // print_r($results);
+    // die();
   }
 
 
@@ -50,9 +55,9 @@
           <tr>
             <th>日付(From)</th>
             <td><label><input type="date" name="tgtFromdate" size="30" value=""></label></td>
-            <th>日付(From)</th>
+            <th>日付(To)</th>
             <td><label><input type="date" name="tgtTodate" size="30" value=""></label></td>
-            <th>カテゴリー</th>
+            <!-- <th>カテゴリー</th>
             <td>
               <div class="category cate">
                 <select name="tgtcategory">
@@ -67,7 +72,7 @@
                   <option value="その他">その他</option>
                 </select>
               </div>
-            </td>
+            </td> -->
             <td>
             <button class="button">検索</button>
             </td>
@@ -83,6 +88,8 @@
         foreach($results as $result)
         {
           echo "<tr>";
+          echo "<th>日付</th>";
+          echo "<td>".$result["tgtdate"]."</td>";
           echo "<th>出費</th>";
           echo "<td>".$result["tgtmoney"]."</td>";
           echo "<th>カテゴリー</th>";
