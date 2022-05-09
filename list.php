@@ -68,7 +68,7 @@
                   echo "<tr>";
                   echo "<form action='list.php' method='post'>";
                   echo "<th>ID</th>";
-                  echo '<td><input type="text" value='.$result["id"].' name="id" ></td>';
+                  echo '<td>'.$result["id"].'</td>';
                   echo "<th>出費</th>";
                   echo '<td><input type="text" value='.$result["tgtmoney"].' name="tgtmoney" ></td>';
                   echo "<th>カテゴリー</th>";

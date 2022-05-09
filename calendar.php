@@ -20,6 +20,9 @@ else
 $daily = new QueryDaily();
 $results = $daily->findAll($today);
 
+// print_r($results);
+// die();
+
 
 $json=json_encode($results,JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
 
