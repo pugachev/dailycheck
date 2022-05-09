@@ -2,8 +2,8 @@
 include 'lib/connect.php';
 include 'lib/daily.php';
 include 'lib/queryDaily.php';
-include 'lib/setting.php';
-include 'lib/querySetting.php';
+// include 'lib/setting.php';
+// include 'lib/querySetting.php';
 
 use PHPMailer\PHPMailerPHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
