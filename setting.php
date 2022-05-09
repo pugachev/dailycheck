@@ -34,7 +34,7 @@
   //通常の画面表示
   else
   {
-    print_r("postしていない場合の通り道");
+    // print_r("postしていない場合の通り道");
     //既存の値を取得して画面にだす
     $setting = new QuerySetting();
     $result = $setting->find();
