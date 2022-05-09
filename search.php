@@ -14,6 +14,10 @@
     $results = $search->search($_POST['tgtFromdate'],$_POST['tgtTodate']);
     // print_r($results);
     // die();
+
+    $fromdate = $_POST['tgtFromdate'];
+    $todate = $_POST['tgtTodate'];
+
   }
 
 
@@ -54,9 +58,9 @@
         <tbody>
           <tr>
             <th>日付(From)</th>
-            <td><label><input type="date" name="tgtFromdate" size="30" value=""></label></td>
+            <td><label><input type="date" name="tgtFromdate"></label></td>
             <th>日付(To)</th>
-            <td><label><input type="date" name="tgtTodate" size="30" value=""></label></td>
+            <td><label><input type="date" name="tgtTodate"></label></td>
             <!-- <th>カテゴリー</th>
             <td>
               <div class="category cate">
@@ -116,5 +120,11 @@
     </footer>
     <script src="jquery-3.5.1.min.js"></script>
     <script src="humberger.js"></script>
+    <script src="datedropper-javascript.js"></script>
+    <script>
+      new dateDropper({
+        selector: 'input[type="date"]'
+      });
+    </script>
   </body>
 </html>
