@@ -193,6 +193,8 @@
         url: "http://localhost/dailycheck/calendar.php?tgtyyyymm="+tgtyearmonth,
         dataType: "json",
         async: false,
+        cache: false,
+        timeout: 10000,
         success: function(data){
           self.events = data.event;
           self.year = data.year;

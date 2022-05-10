@@ -19,6 +19,50 @@ class QuerySetting extends connect
         $tgtmaxcalory = $this->setting->getTgtmaxcalory();
         $tgtmaxmoney = $this->setting->getTgtmaxmoney();
         $tgtmailaddress = $this->setting->getTgtmailaddress();
+        $tgtfile = $this->setting->getFile();
+
+        // print_r($tgtfile['tgtholilday']['tmp_name']);
+        // die();
+
+        /* CSV処理 */
+        $detect_order = 'ASCII,JIS,UTF-8,CP51932,SJIS-win';
+        setlocale(LC_ALL, 'ja_JP.UTF-8');
+
+        /* 文字コードを変換してファイルを置換 */
+        $buffer = file_get_contents($tgtfile);
+        if (!$encoding = mb_detect_encoding($buffer, $detect_order, true)) {
+            // 文字コードの自動判定に失敗
+            unset($buffer);
+            throw new RuntimeException('Character set detection failed');
+        }
+        file_put_contents($tgtfile, mb_convert_encoding($buffer, 'UTF-8', $encoding));
+        unset($buffer);
+
+        /* トランザクション処理 */
+        $this->dbh->beginTransaction();
+        try 
+        {
+            $fp = fopen($tgtfile, 'rb');
+            while ($row = fgetcsv($fp)) {
+                if ($row === array(null)) {
+                    // 空行はスキップ
+                    continue;
+                }
+                $stmt = $this->dbh->prepare("INSERT INTO holiday (tgtdate,created_at, updated_at) VALUES (:tgtdate, NOW(), NOW())");
+                $stmt->bindParam(':tgtdate', $row[0], PDO::PARAM_STR);
+                $stmt->execute();
+            }
+            if (!feof($fp)) {
+                // ファイルポインタが終端に達していなければエラー
+                throw new RuntimeException('CSV parsing error');
+            }
+            fclose($fp);
+            $this->dbh->commit();
+        } catch (Exception $e) {
+            fclose($fp);
+            $this->dbh->rollBack();
+            throw $e;
+        }
 
         if ($id) 
         {

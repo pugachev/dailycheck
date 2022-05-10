@@ -146,6 +146,24 @@ class QueryDaily extends connect
         return $return;
     }
 
+    public function getHoliday($tgtmonth)
+    {
+        $tgtmonth .= "%";
+        $stmt = $this->dbh->prepare("SELECT * FROM holiday WHERE tgtdate like :tgtmonth ORDER BY tgtdate asc");
+        $stmt->bindParam(':tgtmonth', $tgtmonth, PDO::PARAM_STR);
+        $stmt->execute();
+        $returns = array();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            // $returns[] = array('holiday' => $row['tgtdate']);
+            // $returns[] = $row['tgtdate'];
+            $returns[]=substr($row['tgtdate'],8);
+        }
+        // foreach($returns as $return){
+        // }
+        // die();
+        return $returns;
+    }
+
     private function getDailyData($results)
     {
         $dailies = array();
@@ -194,8 +212,16 @@ class QueryDaily extends connect
             
         }
         $dailies['event'] = $tmp;
-        $dailies['holiday']= array("9","12","25");
 
+
+        // $dailies['holiday']= array("9","12","25");
+        $tgtholiday = $dailies['year'].'/'.$dailies['month'];
+        $dailies['holiday'] = $this->getHoliday($tgtholiday);
+
+        // print_r(substr($dailies['holiday'][0],0,8));
+        // print_r($dailies['holiday']);
+        // die();
+        
         return $dailies;
     }
 

@@ -3,6 +3,11 @@
   include 'lib/setting.php';
   include 'lib/querySetting.php';
 
+  /* HTML特殊文字をエスケープする関数 */
+  function h($str) {
+    return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
+  }
+
   //入力処理
   if ((!empty($_POST['tgtmaxcalory']) || !empty($_POST['tgtmaxmoney'])) || (!empty($_GET['tgtmailaddress'])))
   {
@@ -11,20 +16,51 @@
     $tgtmaxmoney = $_POST['tgtmaxmoney'];
     $tgtmailaddress = $_POST['tgtmailaddress'];
 
-
     $setting = new Setting();
 
-    //パターン1 idがある場合(update)
-    if ((!empty($_POST['id'])))
-    {
-      $setting->setId($_POST['id']);
-      // print_r( $setting->getId());
-      // die();
-    }
+      //パターン1 idがある場合(update)
+      if ((!empty($_POST['id'])))
+      {
+        $setting->setId($_POST['id']);
+        // print_r( $setting->getId());
+        // die();
+      }
 
-    $setting->setTgtmaxcalory($tgtmaxcalory);
-    $setting->setTgtmaxmoney($tgtmaxmoney);
-    $setting->setTgtmailaddress($tgtmailaddress);
+      $setting->setTgtmaxcalory($tgtmaxcalory);
+      $setting->setTgtmaxmoney($tgtmaxmoney);
+      $setting->setTgtmailaddress($tgtmailaddress);
+
+    // パラメータを正しい構造で受け取った時のみ実行
+    if (isset($_FILES['tgtholilday']['error']) && is_int($_FILES['tgtholilday']['error'])) {
+
+      try {
+
+          /* ファイルアップロードエラーチェック */
+          switch ($_FILES['tgtholilday']['error']) {
+              case UPLOAD_ERR_OK:
+                  // エラー無し
+                  break;
+              case UPLOAD_ERR_NO_FILE:
+                  // ファイル未選択
+                  throw new RuntimeException('File is not selected');
+              case UPLOAD_ERR_INI_SIZE:
+              case UPLOAD_ERR_FORM_SIZE:
+                  // 許可サイズを超過
+                  throw new RuntimeException('File is too large');
+              default:
+                  throw new RuntimeException('Unknown error');
+          }
+
+          $tmp_name = $_FILES['tgtholilday']['tmp_name'];
+          $setting->setFile( $tmp_name );
+
+      } catch (Exception $e) {
+
+        return;
+
+      }
+
+    }
 
     $setting->save();
 
@@ -57,7 +93,7 @@
   <body>
     <?php include 'header.php';?>
     <main>
-        <form action="setting.php" method="post">
+        <form enctype="multipart/form-data"  action="setting.php" method="POST">
           <table class="form-table">
             <tbody>
               <tr>
@@ -72,6 +108,11 @@
               <tr>
                 <th>メールアドレス</th>
                 <td><input type="text" name="tgtmailaddress" size="60" value="<?php if(!empty($result['tgtmailaddress'])) { echo $result['tgtmailaddress'];} ?>">
+                </td>
+              </tr>
+              <tr>
+                <th>ファイル</th>
+                <td><input type="file" name="tgtholilday" size="60" >
                 </td>
               </tr>
             </tbody>

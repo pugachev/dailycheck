@@ -5,6 +5,7 @@ class Setting
     private $tgtmaxcalory = null;
     private $tgtmaxmoney = null;
     private $tgtmailaddress = null;
+    private $tgtfile = null;
 
     public function save()
     {
@@ -40,6 +41,11 @@ class Setting
         return $this->tgtmailaddress;
     }
 
+    public function getFile()
+    {
+        return $this->tgtfile;
+    }
+
     public function setId($id)
     {
         $this->id = $id;
@@ -63,6 +69,11 @@ class Setting
     public function setTgtmailaddress($tgtmailaddress)
     {
         $this->tgtmailaddress = $tgtmailaddress;
+    }
+
+    public function setFile($tgtfile)
+    {
+        $this->tgtfile = $tgtfile;
     }
 
     public function setCreatedAt($created_at)
