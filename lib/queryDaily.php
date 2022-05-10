@@ -156,7 +156,7 @@ class QueryDaily extends connect
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             // $returns[] = array('holiday' => $row['tgtdate']);
             // $returns[] = $row['tgtdate'];
-            $returns[]=substr($row['tgtdate'],8);
+            $returns[]=ltrim(substr($row['tgtdate'],8),0);
         }
         // foreach($returns as $return){
         // }
@@ -214,7 +214,7 @@ class QueryDaily extends connect
         $dailies['event'] = $tmp;
 
 
-        // $dailies['holiday']= array("9","12","25");
+        $dailies['holiday']= array("9","12","25");
         $tgtholiday = $dailies['year'].'/'.$dailies['month'];
         $dailies['holiday'] = $this->getHoliday($tgtholiday);
 
