@@ -146,6 +146,7 @@ if ((!empty($_POST['tgtdate']) || !empty($_POST['tgtcategory'])) || (!empty($_GE
                 <option value="税金">税金</option>
                 <option value="外食">外食</option>
                 <option value="その他">その他</option>
+                <option value="カロリー摂取のみ">カロリー摂取のみ</option>
               </select>
             </div>
           </td>

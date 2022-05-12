@@ -59,8 +59,10 @@
 	        <table>
             <div class="headinfo">
               <div class="tgthead"><?php echo  $tgtyearmonthdate; ?></div>
-              <div class="tgthead">出費計:<?php echo $head_reqults['totalmoeny']; ?> 円</div>
-              <div class="tgthead">カロリー計:<?php echo $head_reqults['totalcalory']; ?> Kcal</div>
+            </div>
+            <div class="headinfo">
+              <div class="tgthead2">出費計:<?php echo $head_reqults['totalmoeny']; ?> 円(差分:<?php echo $head_reqults['diffmoney']; ?> 円)</div>
+              <div class="tgthead2">カロリー計:<?php echo $head_reqults['totalcalory']; ?> Kcal(差分:<?php echo $head_reqults['diffcalory']; ?> kcal)</div>
             </div>
             <tbody>
               <?php 
@@ -68,15 +70,15 @@
                   echo "<tr>";
                   echo "<form action='list.php' method='post'>";
                   echo "<th>ID</th>";
-                  echo '<td>'.$result["id"].'</td>';
+                  echo '<td><input type="text" value='.$result["id"].' name="id" class="hoge"></td>';
                   echo "<th>出費</th>";
-                  echo '<td><input type="text" value='.$result["tgtmoney"].' name="tgtmoney" ></td>';
+                  echo '<td><input type="text" value='.$result["tgtmoney"].' name="tgtmoney"  class="hoge"></td>';
                   echo "<th>カテゴリー</th>";
                   echo "<td>".$result["tgtcategory"]."</td>";
                   echo "<th>品目</th>";
                   echo "<td>".$result["tgtitem"]."</td>";
                   echo "<th>カロリー</th>";
-                  echo '<td><input type="text" value='.$result["tgtcalory"].' name="tgtcalory" ></td>';
+                  echo '<td><input type="text" value='.$result["tgtcalory"].' name="tgtcalory"  class="hoge"></td>';
                   echo "<td><button class='button' name='modify' value='1' >修正</button></td>";
                   echo "<td><button class='button' name='delete' value='2' >削除</button></td>";
                   echo "</form>";

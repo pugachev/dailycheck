@@ -49,8 +49,8 @@
     console.log(this.prevyyyyMM);
     console.log(this.nextyyyyMM);
 
-    this.prevURL = "http://localhost/dailycheck/index.php?tgtyyyymm="+this.prevyyyyMM;
-    this.nextURL = "http://localhost/dailycheck/index.php?tgtyyyymm="+this.nextyyyyMM;
+    this.prevURL = "https://ikefukuro40.tech/dailycheck/index.php?tgtyyyymm="+this.prevyyyyMM;
+    this.nextURL = "https://ikefukuro40.tech/dailycheck/index.php?tgtyyyymm="+this.nextyyyyMM;
     // jsonファイルから読み込む
     this.loadData();
 
@@ -190,7 +190,7 @@
       var tgtyearmonth=self.year+'/'+self.month;
       $.ajax({
         type: "GET",
-        url: "http://localhost/dailycheck/calendar.php?tgtyyyymm="+tgtyearmonth,
+        url: "https://ikefukuro40.tech/dailycheck/calendar.php?tgtyyyymm="+tgtyearmonth,
         dataType: "json",
         async: false,
         cache: false,

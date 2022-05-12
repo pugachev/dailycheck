@@ -26,7 +26,7 @@ label {
   height: 36px;
 }
 
-/* input[type="date"] {
+input[type="date"] {
   position: relative;
   padding: 0 10px;
   width: 200px;
@@ -36,7 +36,7 @@ label {
   box-sizing: border-box;
   font-size: 14px;
   color: #999;
-} */
+}
 
 #alert{
   text-align: center;

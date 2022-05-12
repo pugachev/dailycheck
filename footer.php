@@ -21,7 +21,7 @@
         var tgtyearmonth = $(".calendar-year-month").text().replace('年','/').replace('月','');
         // var tgturl = "https://ikefukuro40.tech/dailycheck/list.php?yearmonth="+tgtyearmonth+"&day="+tgtday;
         // var tgturl = "https://ikefukuro40.tech/dailycheck/list.php?yearmonth="+tgtyearmonth+"&day="+tgtday;
-        var tgturl = "http://localhost/dailycheck/list.php?yearmonth="+tgtyearmonth+"&day="+tgtday;
+        var tgturl = "https://ikefukuro40.tech/dailycheck/list.php?yearmonth="+tgtyearmonth+"&day="+tgtday;
         location.href = tgturl;
     });
 	});

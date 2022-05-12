@@ -251,6 +251,8 @@ class QueryDaily extends connect
 
     public function delete($id)
     {
+        print_r($id);
+        die();
         $stmt = $this->dbh->prepare("delete from records WHERE id=:id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
