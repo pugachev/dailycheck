@@ -133,7 +133,7 @@ if ((!empty($_POST['tgtdate']) || !empty($_POST['tgtcategory'])) || (!empty($_GE
           </td>
         </tr>
         <tr>
-          <th>カテゴリー</th>
+          <th>分類</th>
           <td>
             <div class="category cate">
               <select name="tgtcategory">
@@ -162,7 +162,7 @@ if ((!empty($_POST['tgtdate']) || !empty($_POST['tgtcategory'])) || (!empty($_GE
           </td>
         </tr>
         <tr>
-          <th>カロリー</th>
+          <th>熱量</th>
           <td><input type="text" name="tgtcalory" size="60" value="">
           </td>
         </tr>
