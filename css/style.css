@@ -136,6 +136,7 @@ header p.descA {
   background-color: #fff;
   border: 2px solid #444;
   border-radius: 4px;
+  display: none;
 }
 
 .humbergerC span {
@@ -145,6 +146,7 @@ header p.descA {
   width: 24px;
   background-color: #444;
   border-radius: 2px;
+  display: none;
 }
 
 .humbergerC span:nth-of-type(1) {
