@@ -189,7 +189,16 @@ class QueryDaily extends connect
         $setting = new QuerySetting();
         $settings = $setting->find();
        
-        // die();
+        //dailyのデータがない場合 or 設定値がない場合
+        if(empty($settings['tgtmaxcalory'])){
+            $settings['tgtmaxcalory'] = intval(0);
+        }else if(empty($settings['tgtmaxmoney'])){
+            $settings['tgtmaxmoney'] = intval(0);
+        }else if(empty($dailies['totalcalory'])){
+            $settings['totalcalory'] = intval(0);
+        }else if(empty($dailies['totalmoeny'])){
+            $settings['totalmoeny'] = intval(0);
+        }
         $tmpdiffcalory = intval($settings['tgtmaxcalory']) - intval($dailies['totalcalory']);
         $tmpdiffmoney = intval($settings['tgtmaxmoney']) - intval($dailies['totalmoeny']);
 
