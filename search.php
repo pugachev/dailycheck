@@ -50,7 +50,7 @@
 
     $search = new QuerySearch();
     // $results = $search->search($_GET['tgtFromdate'],$_GET['tgtTodate'],$_GET['tgtcategory']);
-    $pager = $search->getPager($limit,$_GET['page'],$_GET['tgtFromdate'],$_GET['tgtTodate'],$_GET['tgtcategory']);
+    $pager = $search->getPager($_GET['page'],$limit,$_GET['tgtFromdate'],$_GET['tgtTodate'],$_GET['tgtcategory']);
 
     // print_r('debug1 '.$pager);
 
