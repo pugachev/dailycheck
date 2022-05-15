@@ -51,7 +51,7 @@
   $results = $daily->find($tgtyearmonthdate);
   $head_reqults = $daily->findTotalByDaily($tgtyearmonthdate);
   
-  // print_r($results);
+  // print_r($head_reqults);
   // die();
 ?>
 <html lang="ja">
@@ -71,7 +71,6 @@
   <body>
   <?php include 'header.php';?>
     <main>
-      
 	        <table>
             <div class="headinfo">
               <div class="tgthead"><?php echo  $tgtyearmonthdate; ?></div>
@@ -82,6 +81,7 @@
             </div>
             <tbody>
               <?php 
+              if(!empty($results)){
                 foreach($results as $result){
                   echo "<tr>";
                   echo "<form action='list.php' method='post'>";
@@ -102,6 +102,11 @@
                   echo "</form>";
                   echo "</tr>";
                 }
+              }
+              else
+              {
+                echo '<div id="alert">データは存在しません！</div>'; 
+              }
               ?>
             </tbody>
          </table>

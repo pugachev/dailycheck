@@ -33,6 +33,14 @@ th, td {
 	width: calc(100% /4);
 }
 
+#alert{
+  text-align: center;
+  width: 70%;
+  margin: 55px auto;
+  font-size:36px;
+  color:red;
+}
+
 .hoge{
     border:0;
     padding:5px;

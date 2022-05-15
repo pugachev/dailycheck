@@ -38,7 +38,7 @@
     $todate = $_POST['tgtTodate'];
     $cate = $_POST['tgtcategory'];
     $total =  $search->totalcount($tgtFromdate,$tgtTodate,$tgtCategory);
-    print_r("POST".'   '.$total["total"]);
+    // print_r("POST".'   '.$total["total"]);
   }
 
   if ((!empty($_GET['tgtFromdate']) || !empty($_GET['tgtTodate']) || !empty($_GET['tgtcategory']) || !empty($_GET['page'])))
@@ -59,7 +59,7 @@
     $cate = $_GET['tgtcategory'];
 
     $total =  $search->totalcount($tgtFromdate,$tgtTodate,$tgtCategory);
-    print_r("GET".'   '.$total["total"]);
+    // print_r("GET".'   '.$total["total"]);
   }
 
 ?>

@@ -1,7 +1,7 @@
 <header>
       <div class="headerFront">
         <div class="headerA">
-          <p class="logo">DailyCheck</p>
+          <a href="https://ikefukuro40.tech/dailycheck/index.php"><p class="logo">DailyCheck</p></a>
           <p class="descA">何か発見があるかもしれない日々の記録</p>
         </div>
         <div class="headerB">

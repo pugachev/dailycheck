@@ -86,18 +86,24 @@ class QuerySetting extends connect
 
     public function find()
     {
+        $setting=[];
         $stmt = $this->dbh->prepare("SELECT  * FROM setting");
         $stmt->execute();
         $setting = $this->getSettingData($stmt->fetchAll(PDO::FETCH_ASSOC));
+        // print_r($setting);
+        // die();
         return $setting;
     }
 
     private function getSettingData($results)
     {
-        $setting = "";
+        $setting = [];
         foreach ($results as $result) {
             $setting=array("id"=>$result["id"],"tgtmaxcalory"=>$result["tgtmaxcalory"],"tgtmaxmoney"=>$result["tgtmaxmoney"],"tgtmailaddress"=>$result["tgtmailaddress"]);
         }
+
+        // print_r($setting);
+        // die();
         return  $setting;
     }
 

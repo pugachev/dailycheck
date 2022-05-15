@@ -16,7 +16,7 @@ class QuerySearch extends connect
     
     public function totalcount($from,$to,$cate)
     {
-        print_r("totalcount ".'   '.$from.'   '.$to.'   '.$cate);
+        // print_r("totalcount ".'   '.$from.'   '.$to.'   '.$cate);
         $sql="select count(id) as total from records where ";
 
         if(!empty($from) && !empty($to))

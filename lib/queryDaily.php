@@ -194,16 +194,22 @@ class QueryDaily extends connect
             $settings['tgtmaxcalory'] = intval(0);
         }else if(empty($settings['tgtmaxmoney'])){
             $settings['tgtmaxmoney'] = intval(0);
+        }else{
+
         }
 
         if(empty($dailies['totalcalory'])){
             $tmpdiffcalory = intval($settings['tgtmaxcalory']) - intval(0);
+            $tmpdiffmoney = intval($settings['tgtmaxmoney']) - intval(0);
         }else if(empty($dailies['totalmoeny'])){
             $tmpdiffmoney = intval($settings['tgtmaxmoney']) - intval(0);
         }else{
             $tmpdiffcalory = intval($settings['tgtmaxcalory']) - intval($dailies['totalcalory']);
             $tmpdiffmoney = intval($settings['tgtmaxmoney']) - intval($dailies['totalmoeny']);
         }
+
+        //print_r("settings ".$settings);
+        //die();
 
         //上で取得した現在のtotal値とMaxの差分を配列に格納する
         if($dailies==""){
